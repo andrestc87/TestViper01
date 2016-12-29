@@ -22,6 +22,14 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    // Array
+    self.toDoArray = [NSArray arrayWithObjects:@"Go to the doctor",@"Pick up the kids from school",@"Study",@"Go to the gym",@"Buy water",@"Do the loundry",nil];
+    
+    [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+    
+    self.tableView.layer.borderColor = [UIColor redColor].CGColor;
+    self.tableView.layer.borderWidth = 3;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,24 +40,42 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return self.toDoArray.count;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
+    static NSString *cellIdentifier = @"testIdentifier";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    
+    // Configure the cell.
+    cell.textLabel.text = [self.toDoArray objectAtIndex:indexPath.row];
     
     return cell;
 }
-*/
+
+
+- (IBAction)addActivityButtonHandler:(id)sender {
+    NSLog(@"-----------");
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    TestViperToDoFormViewController *myNewVC = (TestViperToDoFormViewController *)[storyboard instantiateViewControllerWithIdentifier:@"toDoForm"];
+    [myNewVC setDelegate:self];
+    [self.navigationController pushViewController:myNewVC animated:YES];
+    
+}
+
+- (void)performUpdate {
+    NSLog(@"UPDATE UPDATE");
+}
+
 
 /*
 // Override to support conditional editing of the table view.

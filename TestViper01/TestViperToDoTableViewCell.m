@@ -8,17 +8,38 @@
 
 #import "TestViperToDoTableViewCell.h"
 
+@interface TestViperToDoTableViewCell()
+@property(nonatomic, assign) BOOL didUpdateConstraints;
+
+- (void) applyConstraints;
+
+@end
+
 @implementation TestViperToDoTableViewCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
+#pragma mark - Lifecycle
+- (instancetype) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self setNeedsUpdateConstraints];
+    }
+    return self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+#pragma mark - UIView Override
+- (void) updateConstraints {
+    if (!self.didUpdateConstraints) {
+        self.didUpdateConstraints = YES;
+        [self applyConstraints];
+    }
+    [super updateConstraints];
+}
 
-    // Configure the view for the selected state
+#pragma mark - Internal
+/**
+ * This method is intended to be overriden by the subclass.
+ */
+- (void) applyConstraints {
+    [self doesNotRecognizeSelector:_cmd];
 }
 
 @end

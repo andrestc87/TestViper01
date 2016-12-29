@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol TestViperToDoFormDelegate
+@required
+- (void)performUpdate;
+@end
+
 @interface TestViperToDoFormViewController : UIViewController
+
+@property (nonatomic, assign) id<TestViperToDoFormDelegate> delegate;
 
 @end

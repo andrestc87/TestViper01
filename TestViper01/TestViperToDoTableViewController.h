@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TestViperToDoFormViewController.h"
 
-@interface TestViperToDoTableViewController : UITableViewController
+@interface TestViperToDoTableViewController : UITableViewController<TestViperToDoFormDelegate>
+
+@property (nonatomic, retain) NSArray *toDoArray;
 
 @end
